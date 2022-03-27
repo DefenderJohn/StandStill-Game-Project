@@ -14,6 +14,10 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkKeyBoardInput();
+    }
+
+    private void checkKeyBoardInput() {
         if (Input.GetKey(KeyCode.A))
             this.transform.Rotate(Vector3.down * ratio);
         if (Input.GetKey(KeyCode.D))
@@ -27,4 +31,6 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
             this.transform.position += this.transform.up * -ratio;
     }
+
+
 }
