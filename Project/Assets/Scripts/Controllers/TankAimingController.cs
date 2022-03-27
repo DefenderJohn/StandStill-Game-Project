@@ -62,6 +62,6 @@ public class TankAimingController : MonoBehaviour
     {
         float singleStep = speed * Time.deltaTime;
         yRotationDir = Quaternion.LookRotation(new Vector3((enemy.transform.position - this.transform.position).x, 0, 0));
-        return Quaternion.RotateTowards(gun.transform.rotation, yRotationDir, singleStep);
+        return Quaternion.RotateTowards(this.transform.rotation, yRotationDir, singleStep);
     }
 }

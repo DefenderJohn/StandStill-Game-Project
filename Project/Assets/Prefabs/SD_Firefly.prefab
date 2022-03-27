@@ -405,10 +405,12 @@ GameObject:
   m_Component:
   - component: {fileID: 305012651121130346}
   - component: {fileID: 6170325231778653829}
+  - component: {fileID: 7798661554719764877}
   - component: {fileID: 606006287743438929}
   - component: {fileID: 6221440204653380966}
   - component: {fileID: 155936818279529721}
   - component: {fileID: 6040225292763483704}
+  - component: {fileID: 8935199251100142089}
   m_Layer: 0
   m_Name: SD_Firefly
   m_TagString: Friendly
@@ -440,14 +442,29 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305012651121223498}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_Mass: 2000
+  m_Drag: 100
+  m_AngularDrag: 100
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7798661554719764877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305012651121223498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47c30030e329ba4b858caa32345aeea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movePos: {x: 0, y: 0, z: 0}
+  agent: {fileID: 0}
+  mainCamera: {fileID: 0}
 --- !u!65 &606006287743438929
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -504,8 +521,33 @@ MonoBehaviour:
   gun: {fileID: 569138282582709905}
   speed: 10
   xzRotationDir: {x: 0, y: 0, z: 0, w: 0}
+  yRotationDir: {x: 0, y: 0, z: 0, w: 0}
   rotationOriginal: {x: 0, y: 0, z: 0, w: 0}
   rotationV3: {x: 0, y: 0, z: 0}
+  pitchLimitation: 0
+  enemyTag: EnemyTank
+--- !u!195 &8935199251100142089
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305012651121223498}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 97.6
+  m_Speed: 3.5
+  m_Acceleration: 1
+  avoidancePriority: 50
+  m_AngularSpeed: 140
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 273.4
+  m_BaseOffset: 98.04
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &305012651121223500
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,7 +861,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3088379719115592324}
-  - component: {fileID: 2698118875039846671}
   m_Layer: 0
   m_Name: Turrent
   m_TagString: Untagged
@@ -843,19 +884,3 @@ Transform:
   m_Father: {fileID: 305012651121130346}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &2698118875039846671
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8778888971044512375}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
