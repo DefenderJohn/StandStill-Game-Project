@@ -2,8 +2,8 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+/Assets/OutReferances/
 
-/Assets/OutsideReferances/
 
 /[Ll]ibrary/
 /[Tt]emp/
