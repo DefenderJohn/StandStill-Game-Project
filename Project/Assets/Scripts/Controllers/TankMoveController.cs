@@ -13,6 +13,7 @@ public class TankMoveController : MonoBehaviour
     {
         movePos = gameObject.transform.position;
         agent = gameObject.GetComponent<NavMeshAgent>();
+        mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -22,8 +23,8 @@ public class TankMoveController : MonoBehaviour
         {
             RaycastHit hit;
             Vector3 mousePos = Input.mousePosition;
-            Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), 
+            mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), 
                 out hit, 
                 100))
             {
