@@ -112,9 +112,10 @@ GameObject:
   - component: {fileID: 2344830690935076429}
   - component: {fileID: 7558657265139623438}
   - component: {fileID: 5184779311070847997}
+  - component: {fileID: 4433819387627581669}
   m_Layer: 0
   m_Name: SD_Tiger-I
-  m_TagString: Untagged
+  m_TagString: EnemyTank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,6 +191,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 66.228485, y: 81.12665, z: 87.43853}
   m_Center: {x: 153.9, y: -39.4, z: 210.4}
+--- !u!114 &4433819387627581669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7863394953858385664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07832c4ea24ae0445b74738052dd19c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  turrent: {fileID: 4288772609036132265}
+  gun: {fileID: 6785782260410635832}
+  speed: 10
+  xzRotationDir: {x: 0, y: 0, z: 0, w: 0}
+  yRotationDir: {x: 0, y: 0, z: 0, w: 0}
+  rotationOriginal: {x: 0, y: 0, z: 0, w: 0}
+  rotationV3: {x: 0, y: 0, z: 0}
+  pitchLimitation: 0
+  enemyTag: Friendly
 --- !u!1 &7863394953858385666
 GameObject:
   m_ObjectHideFlags: 0
