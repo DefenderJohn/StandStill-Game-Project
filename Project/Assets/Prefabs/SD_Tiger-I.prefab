@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 7558657265139623438}
   - component: {fileID: 5184779311070847997}
   - component: {fileID: 4433819387627581669}
+  - component: {fileID: -2934946503001194296}
   m_Layer: 0
   m_Name: SD_Tiger-I
   m_TagString: EnemyTank
@@ -213,6 +214,22 @@ MonoBehaviour:
   rotationV3: {x: 0, y: 0, z: 0}
   pitchLimitation: 0
   enemyTag: Friendly
+--- !u!208 &-2934946503001194296
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7863394953858385664}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 250, y: 100, z: 300}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7863394953858385666
 GameObject:
   m_ObjectHideFlags: 0

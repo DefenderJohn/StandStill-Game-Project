@@ -21,15 +21,21 @@ public class TankMoveController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            //agent.Resume();
             RaycastHit hit;
             Vector3 mousePos = Input.mousePosition;
             mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), 
                 out hit, 
-                100))
+                10000))
             {
                 agent.destination = hit.point;
             }
         }
+
+        //if (Mathf.Abs(Vector3.Distance(this.transform.position, movePos)) <= 1)
+        //{
+        //    agent.Stop();
+        //}
     }
 }

@@ -411,6 +411,7 @@ GameObject:
   - component: {fileID: 155936818279529721}
   - component: {fileID: 6040225292763483704}
   - component: {fileID: 8935199251100142089}
+  - component: {fileID: 5365257668585069777}
   m_Layer: 0
   m_Name: SD_Firefly
   m_TagString: Friendly
@@ -548,6 +549,23 @@ NavMeshAgent:
   m_BaseOffset: 98.04
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5365257668585069777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305012651121223498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b0332630c5f5e34abac8aa23d686935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingGap: 3
+  viewGap: 2
+  enemyTag: EnemyTank
+  shootingPos: {fileID: 889969977019760460}
+  checkedObject: {fileID: 0}
 --- !u!1 &305012651121223500
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,8 +832,40 @@ Transform:
   m_Children:
   - {fileID: 305012651121130342}
   - {fileID: 305012651121130344}
+  - {fileID: 7864154468110018966}
+  - {fileID: 8483450034542572009}
   m_Father: {fileID: 3088379719115592324}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &889969977019760460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7864154468110018966}
+  m_Layer: 0
+  m_Name: ShootingPosFront
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7864154468110018966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889969977019760460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 325}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7132312615567429024}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3260877303117160966
 GameObject:
@@ -851,6 +901,36 @@ Transform:
   - {fileID: 305012651121130304}
   m_Father: {fileID: 305012651121130346}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5540448401780269272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8483450034542572009}
+  m_Layer: 0
+  m_Name: ShootingPosBack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8483450034542572009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5540448401780269272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7132312615567429024}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8778888971044512375
 GameObject:
