@@ -5,10 +5,18 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float ratio = 0.5f;
+    public Camera mainCamera;
     // Start is called before the first frame update
     void Start()
     {
-
+        foreach (GameObject objects in GameObject.FindGameObjectsWithTag("Friendly"))
+        {
+            objects.gameObject.transform.Find("Canvas").GetComponent<Canvas>().worldCamera = this.gameObject.transform.Find("Camera").GetComponent<Camera>();
+        }
+        //foreach (GameObject objects in GameObject.FindGameObjectsWithTag("EnemyTank"))
+        //{
+        //    objects.gameObject.transform.Find("Canvas").GetComponent<Canvas>().worldCamera = this.gameObject.transform.Find("Camera").GetComponent<Camera>();
+        //}
     }
 
     // Update is called once per frame

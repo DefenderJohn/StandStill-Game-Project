@@ -11,12 +11,14 @@ public class TankShootingController : MonoBehaviour
     public string enemyTag;
     public GameObject shootingPosFront;
     public GameObject shootingPosRear;
-    public GameObject checkedObject;
+    public GameObject targetObject;
+    private float attackAbility;
     // Start is called before the first frame update
     void Start()
     {
         savedShootingGap = shootingGap;
         savedViewGap = viewGap;
+        attackAbility = this.gameObject.GetComponent<TankController>().attack;
     }
 
     // Update is called once per frame
@@ -29,23 +31,24 @@ public class TankShootingController : MonoBehaviour
             viewGap -= Time.deltaTime;
             if (viewGap <= 0.0f)
             {
-                if (aimOnTarget())
+                if (aimOnTarget(out GameObject targetObject))
                 {
                     shootingGap = savedShootingGap;
-                    shoot();
+                    shoot(targetObject);
                 }
                 viewGap = savedViewGap;
             }
         }
     }
    
-    private bool aimOnTarget() {
+    private bool aimOnTarget(out GameObject targetObject) {
+        targetObject = null;
         Ray checkingRay = new Ray(shootingPosFront.transform.position, shootingPosFront.transform.position - shootingPosRear.transform.position);
         bool hittedObject = Physics.Raycast(checkingRay, out RaycastHit hitInfo, 200);
         if (hittedObject)
         {
-            checkedObject = hitInfo.collider.gameObject;
-            if (checkedObject.tag == enemyTag)
+            targetObject = hitInfo.collider.gameObject;
+            if (targetObject.tag == enemyTag)
             {
                 return true;
             }
@@ -53,7 +56,7 @@ public class TankShootingController : MonoBehaviour
         return false;
     }
 
-    private void shoot() {
-        print("shooted");
+    private void shoot(GameObject hittedObject) {
+        hittedObject.GetComponent<IHitable>().getHit(attackAbility);
     }
 }
