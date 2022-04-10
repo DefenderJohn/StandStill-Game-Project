@@ -5,6 +5,7 @@
 Project/Assets/OutsideReferances/
 *.zip
 *.tmp
+*.pdf
 ~*
 
 /[Ll]ibrary/
