@@ -7,6 +7,7 @@ public class TankAimingController : MonoBehaviour
     public GameObject enemy;
     public GameObject turrent;
     public GameObject gun;
+    public GameObject virtualAiming;
     public float speed = 10f;
     public Quaternion xzRotationDir;
     public Quaternion yRotationDir;
@@ -30,6 +31,7 @@ public class TankAimingController : MonoBehaviour
 
     private void setupEnemy() {
         float minDistance = float.MaxValue;
+        enemy = virtualAiming;
         foreach (GameObject tempEnemy in GameObject.FindGameObjectsWithTag(enemyTag))
         {
             if (Vector3.Distance(tempEnemy.transform.position, this.transform.position) < minDistance)
