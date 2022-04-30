@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public interface Controlable {
     void haveControl();
     void releaseControl();
+    void setEnemy(GameObject enemy);
+    void setDestination(Vector3 destination);
 }
 
 public class TankMoveController : MonoBehaviour, Controlable
@@ -15,6 +17,7 @@ public class TankMoveController : MonoBehaviour, Controlable
     public Camera mainCamera;
     public Vector3 speed;
     public bool controlled;
+    public Vector3 dest;
 
     public void haveControl()
     {
@@ -24,6 +27,17 @@ public class TankMoveController : MonoBehaviour, Controlable
     public void releaseControl()
     {
         this.controlled = false;
+    }
+
+    public void setDestination(Vector3 destination)
+    {
+        this.dest = destination;
+    }
+
+    public void setEnemy(GameObject enemy)
+    {
+        this.gameObject.GetComponent<TankAimingController>().enemy = enemy;
+        this.gameObject.GetComponent<TankAimingController>().forceSetEnemy = true;
     }
 
     // Start is called before the first frame update
@@ -40,18 +54,11 @@ public class TankMoveController : MonoBehaviour, Controlable
 
         if (controlled && this.gameObject.GetComponent<TankController>().fuel > 0)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                RaycastHit hit;
-                Vector3 mousePos = Input.mousePosition;
-                mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition),
-                    out hit,
-                    10000))
-                {
-                    agent.destination = hit.point;
-                }
-            } 
+            agent.destination = dest;
+        }
+        if (this.gameObject.GetComponent<TankController>().fuel <= 0)
+        {
+            agent.isStopped = true;
         }
     }
 }
