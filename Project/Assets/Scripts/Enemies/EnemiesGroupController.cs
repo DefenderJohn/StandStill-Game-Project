@@ -14,8 +14,8 @@ public class EnemiesGroupController : MonoBehaviour
     private float backupSingleEnemySpawnDelay;
     public HashSet<GameObject> ActiveEnemies;
     public int waveEnemyNumbers;
-    public int waveNumber=0;
-    public int currentEnemy=0;
+    public int waveNumber = 0;
+    public int currentEnemy = 0;
     public GameObject enemyPrefab;
     int destinationIndex;
     int sourceIndex;
@@ -35,18 +35,17 @@ public class EnemiesGroupController : MonoBehaviour
         if (checkingDelay <= 0)
         {
             checkingDelay = -1.0f;
-            if (checkIFAllEnemyDead())
+
+            enemyWaveDelay -= Time.deltaTime;
+            if (enemyWaveDelay <= 0)
             {
-                enemyWaveDelay -= Time.deltaTime;
-                if (enemyWaveDelay <= 0)
-                {
-                    checkingDelay = backupCheckingDelay;
-                    enemyWaveDelay = backupWaveDelay;
-                    waveNumber++;
-                    waveEnemyNumbers = (int)Mathf.Log(waveNumber,1.756f);
-                    spawnEnemies();
-                }
+                checkingDelay = backupCheckingDelay;
+                enemyWaveDelay = backupWaveDelay;
+                waveNumber++;
+                waveEnemyNumbers = (int)Mathf.Log(waveNumber, 1.756f);
+                spawnEnemies();
             }
+
         }
     }
 
@@ -59,7 +58,7 @@ public class EnemiesGroupController : MonoBehaviour
     {
         destinationIndex = Random.Range(0, destinations.Count);
         sourceIndex = Random.Range(0, spawnPositions.Count);
-        GameObject newEnemy = Instantiate<GameObject>(enemyPrefab, spawnPositions[sourceIndex].transform,worldPositionStays:true);
+        GameObject newEnemy = Instantiate<GameObject>(enemyPrefab, spawnPositions[sourceIndex].transform, worldPositionStays: true);
         newEnemy.transform.position = spawnPositions[sourceIndex].transform.position;
         newEnemy.gameObject.GetComponent<EnemyController>().movePos = destinations[destinationIndex].transform.position;
         ActiveEnemies.Add(newEnemy);

@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class BaseController : MonoBehaviour, Controlable
+public class BaseController : MonoBehaviour, Controlable, IHitable
 {
     public float HP = 10000;
     public float maxFuel = 2000;
     public float fuel = 0;
     public int maxAmmo = 500;
     public int ammo = 0;
+    public int maxHeal = 10000;
+    public int heal = 0;
     public int currentSceneIndex;
     public bool displayEnabled;
     public Canvas mainUI;
@@ -19,12 +21,14 @@ public class BaseController : MonoBehaviour, Controlable
     public Text statusButtonText;
     public Text fuelText;
     public Text ammoText;
+    public Text healText;
     public Button restartButton;
     public Button resumeButton;
     public Button setDisplayButton;
     public Slider HPSlider;
     public Slider fuelSlider;
     public Slider ammoSlider;
+    public Slider healSlider;
 
 
     public void haveControl()
@@ -57,6 +61,8 @@ public class BaseController : MonoBehaviour, Controlable
         this.fuelSlider.minValue = 0;
         this.ammoSlider.maxValue = maxAmmo;
         this.ammoSlider.minValue = 0;
+        this.healSlider.maxValue = maxHeal;
+        this.healSlider.minValue = 0;
     }
 
     // Update is called once per frame
@@ -109,6 +115,8 @@ public class BaseController : MonoBehaviour, Controlable
             this.ammoSlider.gameObject.SetActive(false);
             this.ammoText.gameObject.SetActive(false);
             this.fuelText.gameObject.SetActive(false);
+            this.healSlider.gameObject.SetActive(false);
+            this.healText.gameObject.SetActive(false);
             statusButtonText.text = "Display Base Status Detail";
             this.displayEnabled = false;
         }
@@ -118,8 +126,15 @@ public class BaseController : MonoBehaviour, Controlable
             this.ammoSlider.gameObject.SetActive(true);
             this.ammoText.gameObject.SetActive(true);
             this.fuelText.gameObject.SetActive(true);
+            this.healSlider.gameObject.SetActive(true);
+            this.healText.gameObject.SetActive(true);
             statusButtonText.text = "Hide Base Status Detail";
             this.displayEnabled = true;
         }
+    }
+
+    public void getHit(float attack)
+    {
+        this.HP -= attack;
     }
 }
