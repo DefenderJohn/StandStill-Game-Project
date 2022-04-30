@@ -264,6 +264,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 19.73627, y: 21.000992, z: 19.7991}
   m_Center: {x: -0.000030517578, y: 0.00000047683713, z: 0.0000014305117}
+--- !u!114 &75174967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75174964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe247cc4ab0f8d4baa8aff93c321905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 10000
+  maxFuel: 2000
+  fuel: 0
+  naxAmmo: 500
+  ammo: 0
+  mainUI: {fileID: 1962631360}
+  gameOverText: {fileID: 0}
+  restartButton: {fileID: 0}
 --- !u!1 &88317841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,7 +1150,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 2f66f74f1d9a5ea48beb0036581bc18d, type: 3}
       propertyPath: m_Name
-      value: House10
+      value: Basement
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2f66f74f1d9a5ea48beb0036581bc18d, type: 3}
       propertyPath: m_RootOrder
@@ -2217,12 +2237,12 @@ PrefabInstance:
     - target: {fileID: 7468672427759675117, guid: e66cbfcdfe49f144dad03ab61d720afd,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.56
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7468672427759675117, guid: e66cbfcdfe49f144dad03ab61d720afd,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8118638050200384706, guid: e66cbfcdfe49f144dad03ab61d720afd,
         type: 3}
@@ -2472,12 +2492,12 @@ PrefabInstance:
     - target: {fileID: 8118638050200384706, guid: e66cbfcdfe49f144dad03ab61d720afd,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8528309460243752381, guid: e66cbfcdfe49f144dad03ab61d720afd,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e66cbfcdfe49f144dad03ab61d720afd, type: 3}
@@ -2638,7 +2658,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Detailed Base Status
+  m_Text: Display Base Status
 --- !u!222 &1909190518
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3166,7 +3186,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2019714046}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 75174967}
+        m_MethodName: OnRestartButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2019714046
 MonoBehaviour:
   m_ObjectHideFlags: 0
