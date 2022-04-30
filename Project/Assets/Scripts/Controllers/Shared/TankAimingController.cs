@@ -44,9 +44,10 @@ public class TankAimingController : MonoBehaviour
                 }
             }
         }
-        else if(enemy = null)
+        else if(enemy == null)
         {
             forceSetEnemy = false;
+            setupEnemy();
         }
     }
 

@@ -69,7 +69,7 @@ public class BaseController : MonoBehaviour, Controlable
         {
             this.gameOverText.gameObject.SetActive(true);
             this.restartButton.gameObject.SetActive(true);
-            Time.timeScale = 0.1f;
+            Time.timeScale = 0.01f;
         }
     }
 
@@ -90,7 +90,7 @@ public class BaseController : MonoBehaviour, Controlable
         this.gamePauseText.gameObject.SetActive(true);
         this.resumeButton.gameObject.SetActive(true);
         this.setDisplayButton.gameObject.SetActive(true);
-        Time.timeScale = 0.1f;
+        Time.timeScale = 0.01f;
     }
 
     public void OnResumeButtonClicked()
