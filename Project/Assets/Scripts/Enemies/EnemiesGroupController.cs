@@ -22,6 +22,7 @@ public class EnemiesGroupController : MonoBehaviour
     {
         backupCheckingDelay = checkingDelay;
         backupWaveDelay = enemyWaveDelay;
+        ActiveEnemies = new HashSet<GameObject>();
     }
 
     // Update is called once per frame
@@ -30,17 +31,17 @@ public class EnemiesGroupController : MonoBehaviour
         checkingDelay -= Time.deltaTime;
         if (checkingDelay <= 0)
         {
-            checkingDelay = -1.0f;
-            if (checkIFAllEnemyDead())
-            {
-                enemyWaveDelay -= Time.deltaTime;
-                if (enemyWaveDelay <= 0)
-                {
-                    checkingDelay = backupCheckingDelay;
-                    enemyWaveDelay = backupWaveDelay;
-                    spawnEnemies();
-                }
-            }
+            //checkingDelay = -1.0f;
+            //if (checkIFAllEnemyDead())
+            //{
+            //    enemyWaveDelay -= Time.deltaTime;
+            //    if (enemyWaveDelay <= 0)
+            //    {
+            //        checkingDelay = backupCheckingDelay;
+            //        enemyWaveDelay = backupWaveDelay;
+            //        spawnEnemies();
+            //    }
+            //}
         }
     }
 

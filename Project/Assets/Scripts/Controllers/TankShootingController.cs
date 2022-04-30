@@ -12,6 +12,7 @@ public class TankShootingController : MonoBehaviour
     public GameObject shootingPosFront;
     public GameObject shootingPosRear;
     public GameObject targetObject;
+    public ParticleSystem shootFire;
     private float attackAbility;
     // Start is called before the first frame update
     void Start()
@@ -57,6 +58,11 @@ public class TankShootingController : MonoBehaviour
     }
 
     private void shoot(GameObject hittedObject) {
-        hittedObject.GetComponent<IHitable>().getHit(attackAbility);
+        if (this.gameObject.GetComponent<TankController>().ammo > 0)
+        {
+            this.shootFire.Play();
+            hittedObject.GetComponent<IHitable>().getHit(attackAbility);
+            this.gameObject.GetComponent<TankController>().ammo--;
+        }
     }
 }
