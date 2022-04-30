@@ -16,6 +16,8 @@ public class TankController : MonoBehaviour
     public Slider ammoSlider;
     public Slider fuelSlider;
     public GameObject turrent;
+    public Vector3 lastframePos;
+    public Vector3 currentSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,10 +32,12 @@ public class TankController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 speed = this.gameObject.GetComponent<TankMoveController>().speed;
-        float fuelConsumeHorizontal = Mathf.Sqrt(speed.x * speed.x + speed.z * speed.z);
-        float fuelConsumeVertical = speed.y;
-        float fuelConsume = fuelConsumeHorizontal * 0.5f * fuelConsumingRatio + fuelConsumeVertical * 1.5f * fuelConsumingRatio;
+        currentSpeed = this.gameObject.transform.position - lastframePos;
+        lastframePos = this.gameObject.transform.position;
+        
+        float fuelConsumeHorizontal = Mathf.Sqrt(currentSpeed.x * currentSpeed.x + currentSpeed.z * currentSpeed.z);
+        float fuelConsumeVertical = currentSpeed.y;
+        float fuelConsume = fuelConsumeHorizontal * 0.5f * fuelConsumingRatio + fuelConsumeVertical * 1.5f * fuelConsumingRatio + 0.1f * fuelConsumingRatio;
         fuel -= fuelConsume;
         HPSlider.value = this.hitPoints;
         fuelSlider.value = this.fuel;

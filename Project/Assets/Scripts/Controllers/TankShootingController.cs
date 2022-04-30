@@ -29,6 +29,7 @@ public class TankShootingController : MonoBehaviour
         if (shootingGap <= 0.0f)
         {
             shootingGap = -1.0f;
+            this.shootFire.Stop();
             viewGap -= Time.deltaTime;
             if (viewGap <= 0.0f)
             {

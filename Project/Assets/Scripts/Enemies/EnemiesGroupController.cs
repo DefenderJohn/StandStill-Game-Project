@@ -14,6 +14,7 @@ public class EnemiesGroupController : MonoBehaviour
     private float backupSingleEnemySpawnDelay;
     public HashSet<GameObject> ActiveEnemies;
     public int waveEnemyNumbers;
+    public int currentEnemy=0;
     public GameObject enemyPrefab;
     int destinationIndex;
     int sourceIndex;
@@ -28,20 +29,21 @@ public class EnemiesGroupController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         checkingDelay -= Time.deltaTime;
         if (checkingDelay <= 0)
         {
-            //checkingDelay = -1.0f;
-            //if (checkIFAllEnemyDead())
-            //{
-            //    enemyWaveDelay -= Time.deltaTime;
-            //    if (enemyWaveDelay <= 0)
-            //    {
-            //        checkingDelay = backupCheckingDelay;
-            //        enemyWaveDelay = backupWaveDelay;
-            //        spawnEnemies();
-            //    }
-            //}
+            checkingDelay = -1.0f;
+            if (checkIFAllEnemyDead())
+            {
+                enemyWaveDelay -= Time.deltaTime;
+                if (enemyWaveDelay <= 0)
+                {
+                    checkingDelay = backupCheckingDelay;
+                    enemyWaveDelay = backupWaveDelay;
+                    spawnEnemies();
+                }
+            }
         }
     }
 
@@ -54,22 +56,25 @@ public class EnemiesGroupController : MonoBehaviour
 
     private void invokeSpawn()
     {
-        GameObject newEnemy = Instantiate<GameObject>(enemyPrefab, spawnPositions[sourceIndex].transform);
+        GameObject newEnemy = Instantiate<GameObject>(enemyPrefab, spawnPositions[sourceIndex].transform,worldPositionStays:true);
         newEnemy.gameObject.GetComponent<EnemyController>().movePos = destinations[destinationIndex].transform.position;
+        ActiveEnemies.Add(newEnemy);
 
-        if (ActiveEnemies.Count < waveEnemyNumbers)
+        if (currentEnemy < waveEnemyNumbers)
         {
+            currentEnemy++;
             Invoke("invokeSpawn", singleEnemySpawnDelay);
         }
         else
         {
+            currentEnemy = 0;
             return;
         }
     }
 
     private bool checkIFAllEnemyDead()
     {
-        if (ActiveEnemies.Count == 0)
+        if (GameObject.FindGameObjectsWithTag("EnemyTank").Length == 0)
         {
             return true;
         }

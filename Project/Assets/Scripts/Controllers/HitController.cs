@@ -8,7 +8,6 @@ public interface IHitable {
 
 public class HitController : MonoBehaviour, IHitable
 {
-    public float hitPoints;
     public void getHit(float attack)
     {
         gameObject.GetComponent<TankController>().hitPoints -= attack;
