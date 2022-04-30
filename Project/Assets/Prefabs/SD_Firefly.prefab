@@ -641,8 +641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0332630c5f5e34abac8aa23d686935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingGap: 3
-  viewGap: 2
+  shootingGap: 2
+  viewGap: 1.7
   enemyTag: EnemyTank
   shootingPosFront: {fileID: 889969977019760460}
   shootingPosRear: {fileID: 5540448401780269272}
@@ -660,18 +660,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972f340af98349146a11119682addb77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 120
+  hitPoints: 370
   ammo: 15
-  fuel: 50
+  fuel: 120
   fuelConsumingRatio: 0.1
   attack: 50
   aimingTime: 3.06
   loadingTime: 1.4
+  canvas: {fileID: 4576428635533187499}
   HPSlider: {fileID: 3188306445106058404}
   ammoSlider: {fileID: 607942546951989606}
   fuelSlider: {fileID: 87829893014115380}
   turrent: {fileID: 8778888971044512375}
+  mainCamera: {fileID: 0}
   lastframePos: {x: 0, y: 0, z: 0}
+  currentSpeed: {x: 0, y: 0, z: 0}
 --- !u!114 &3545611164767370659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2370,6 +2373,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198003277540838118, guid: e1b08032bec16ba4eb1ae23cbd572664,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198166025632870074, guid: e1b08032bec16ba4eb1ae23cbd572664,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198604367962915600, guid: e1b08032bec16ba4eb1ae23cbd572664,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 198604367962915600, guid: e1b08032bec16ba4eb1ae23cbd572664,
         type: 3}
       propertyPath: UVModule.flipU
@@ -2380,6 +2398,21 @@ PrefabInstance:
       propertyPath: UVModule.flipV
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198751835582626154, guid: e1b08032bec16ba4eb1ae23cbd572664,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198805160044956896, guid: e1b08032bec16ba4eb1ae23cbd572664,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198844874048127756, guid: e1b08032bec16ba4eb1ae23cbd572664,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 198917022394846920, guid: e1b08032bec16ba4eb1ae23cbd572664,
         type: 3}
       propertyPath: looping
@@ -2388,6 +2421,11 @@ PrefabInstance:
     - target: {fileID: 198917022394846920, guid: e1b08032bec16ba4eb1ae23cbd572664,
         type: 3}
       propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198917022394846920, guid: e1b08032bec16ba4eb1ae23cbd572664,
+        type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198917022394846920, guid: e1b08032bec16ba4eb1ae23cbd572664,
@@ -2404,6 +2442,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startLifetime.minMaxState
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198918736123329914, guid: e1b08032bec16ba4eb1ae23cbd572664,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 199271172029159390, guid: e1b08032bec16ba4eb1ae23cbd572664,
         type: 3}

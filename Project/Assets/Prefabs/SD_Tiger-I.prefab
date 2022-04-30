@@ -1530,10 +1530,12 @@ MonoBehaviour:
   attack: 60
   aimingTime: 3
   loadingTime: 5
+  canvas: {fileID: 6057069392308248283}
   HPSlider: {fileID: 1621144191139629407}
   ammoSlider: {fileID: 1945803917061355081}
   fuelSlider: {fileID: 5914769919486421856}
   turrent: {fileID: 4288772609036132265}
+  mainCamera: {fileID: 0}
   lastframePos: {x: 0, y: 0, z: 0}
   currentSpeed: {x: 0, y: 0, z: 0}
 --- !u!114 &5279874070549353326
