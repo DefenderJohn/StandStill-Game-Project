@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class BaseController : MonoBehaviour,Controlable
+public class BaseController : MonoBehaviour, Controlable
 {
     public float HP = 10000;
     public float maxFuel = 2000;
     public float fuel = 0;
     public int maxAmmo = 500;
     public int ammo = 0;
+    public int currentSceneIndex;
     public Canvas mainUI;
     public GameObject gameOverText;
     public GameObject restartButton;
     public Slider HPSlider;
     public Slider fuelSlider;
     public Slider ammoSlider;
+
 
     public void haveControl()
     {
@@ -40,6 +43,7 @@ public class BaseController : MonoBehaviour,Controlable
     // Start is called before the first frame update
     void Start()
     {
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         this.HPSlider.maxValue = HP;
         this.HPSlider.minValue = 0;
         this.fuelSlider.maxValue = maxFuel;
@@ -54,23 +58,27 @@ public class BaseController : MonoBehaviour,Controlable
         this.HPSlider.value = this.HP;
         this.ammoSlider.value = this.ammo;
         this.fuelSlider.value = this.fuel;
-        if (this.HP <= 0) {
+        if (this.HP <= 0)
+        {
             this.gameOverText.SetActive(true);
             this.restartButton.SetActive(true);
             Time.timeScale = 0;
         }
     }
 
-    public void OnRestartButtonClicked() { 
-    
+    public void OnRestartButtonClicked()
+    {
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
-    public void OnPauseButtonClicked() { 
-    
+    public void OnPauseButtonClicked()
+    {
+
     }
 
-    public void OnResumeButtonClicked() { 
-    
+    public void OnResumeButtonClicked()
+    {
+
     }
 
     public void OnChangeDisplaySettingButtonClicked()
