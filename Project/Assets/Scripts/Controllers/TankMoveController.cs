@@ -3,12 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TankMoveController : MonoBehaviour
+public interface Controlable {
+    void haveControl();
+    void releaseControl();
+}
+
+public class TankMoveController : MonoBehaviour, Controlable
 {
     public Vector3 movePos;
     public NavMeshAgent agent;
     public Camera mainCamera;
     public Vector3 speed;
+    public bool controlled;
+
+    public void haveControl()
+    {
+        this.controlled = true;
+    }
+
+    public void releaseControl()
+    {
+        this.controlled = false;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -21,24 +37,21 @@ public class TankMoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            //agent.Resume();
-            RaycastHit hit;
-            Vector3 mousePos = Input.mousePosition;
-            mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition), 
-                out hit, 
-                10000))
-            {
-                agent.destination = hit.point;
-            }
-        }
 
-        //if (Mathf.Abs(Vector3.Distance(this.transform.position, movePos)) <= 1)
-        //{
-        //    agent.Stop();
-        //}
+        if (controlled && this.gameObject.GetComponent<TankController>().fuel > 0)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit hit;
+                Vector3 mousePos = Input.mousePosition;
+                mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition),
+                    out hit,
+                    10000))
+                {
+                    agent.destination = hit.point;
+                }
+            } 
+        }
     }
 }

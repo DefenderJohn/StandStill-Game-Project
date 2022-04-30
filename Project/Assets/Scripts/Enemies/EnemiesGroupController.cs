@@ -14,6 +14,7 @@ public class EnemiesGroupController : MonoBehaviour
     private float backupSingleEnemySpawnDelay;
     public HashSet<GameObject> ActiveEnemies;
     public int waveEnemyNumbers;
+    public int waveNumber=0;
     public int currentEnemy=0;
     public GameObject enemyPrefab;
     int destinationIndex;
@@ -41,6 +42,8 @@ public class EnemiesGroupController : MonoBehaviour
                 {
                     checkingDelay = backupCheckingDelay;
                     enemyWaveDelay = backupWaveDelay;
+                    waveNumber++;
+                    waveEnemyNumbers = (int)Mathf.Log(waveNumber,1.756f);
                     spawnEnemies();
                 }
             }
@@ -49,14 +52,15 @@ public class EnemiesGroupController : MonoBehaviour
 
     private void spawnEnemies()
     {
-        destinationIndex = Random.Range(0, destinations.Count);
-        sourceIndex = Random.Range(0, spawnPositions.Count);
         Invoke("invokeSpawn", singleEnemySpawnDelay);
     }
 
     private void invokeSpawn()
     {
+        destinationIndex = Random.Range(0, destinations.Count);
+        sourceIndex = Random.Range(0, spawnPositions.Count);
         GameObject newEnemy = Instantiate<GameObject>(enemyPrefab, spawnPositions[sourceIndex].transform,worldPositionStays:true);
+        newEnemy.transform.position = spawnPositions[sourceIndex].transform.position;
         newEnemy.gameObject.GetComponent<EnemyController>().movePos = destinations[destinationIndex].transform.position;
         ActiveEnemies.Add(newEnemy);
 

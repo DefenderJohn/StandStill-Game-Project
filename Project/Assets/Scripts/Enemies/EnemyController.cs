@@ -21,25 +21,33 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!contactWithEnemy)
+        if (this.gameObject.GetComponent<TankController>().fuel > 0)
         {
-            foreach (GameObject friends in GameObject.FindGameObjectsWithTag("Friendly"))
+            if (!contactWithEnemy)
             {
-                if (Vector3.Distance(friends.gameObject.transform.position,this.gameObject.transform.position) <= 100)
+                foreach (GameObject friends in GameObject.FindGameObjectsWithTag("Friendly"))
                 {
-                    agent.isStopped = true;
-                    contactWithEnemy = true;
-                    enemyInContact = friends;
-                    break;
+                    if (Vector3.Distance(friends.gameObject.transform.position, this.gameObject.transform.position) <= 100)
+                    {
+                        agent.isStopped = true;
+                        contactWithEnemy = true;
+                        enemyInContact = friends;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                if (enemyInContact == null || Vector3.Distance(enemyInContact.transform.position, this.transform.position) > 130)
+                {
+                    agent.isStopped = false;
+                    contactWithEnemy = false;
                 }
             }
         }
-        else {
-            if (enemyInContact == null || Vector3.Distance(enemyInContact.transform.position, this.transform.position) > 130)
-            {
-                agent.isStopped = false;
-                contactWithEnemy = false;
-            }
+        else
+        {
+            agent.isStopped = true;
         }
     }
 }
