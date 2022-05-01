@@ -11,8 +11,8 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
     public float fuel = 0;
     public int maxAmmo = 500;
     public int ammo = 0;
-    public int maxHeal = 10000;
-    public int heal = 0;
+    public float maxHeal = 10000;
+    public float heal = 0;
     public int currentSceneIndex;
     public bool displayEnabled;
     public Canvas mainUI;
@@ -30,10 +30,53 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
     public Slider ammoSlider;
     public Slider healSlider;
 
+    public Slider refuelCurrentSlider;
+    public Slider refuelTargetSlider;
+    public Slider reloadCurrentSlider;
+    public Slider reloadTargetSlider;
+    public Slider repairCurrentSlider;
+    public Slider repairTargetSlider;
+    public Slider dropoffCurrentSlider;
+    public Slider dropoffTargetSlider;
 
-    public void haveControl()
+    public Text refuelCurrentText;
+    public Text refuelTargetText;
+    public Text reloadCurrentText;
+    public Text reloadTargetText;
+    public Text repairCurrentText;
+    public Text repairTargetText;
+    public Text dropoffCurrentText;
+    public Text dropoffTargetText;
+
+    public GameObject refuelMenu;
+    public GameObject reloadMenu;
+    public GameObject repairMenu;
+    public GameObject dropoffMenu;
+
+    public Text refuelText;
+    public Text reloadText;
+    public Text repairText;
+    public Text dropoffText;
+
+    public char refueling;
+    public char reloading;
+    public char repairing;
+    public char dropping;
+
+    public float refuelRatio;
+    public float reloadRatio;
+    public float repairRatio;
+    public float dropRatio;
+    public float tempAmmo;
+
+    public Canvas baseUI;
+    public GameObject supplyingObject;
+
+    public bool haveControl(GameObject caller)
     {
-        return;
+        this.baseUI.gameObject.SetActive(true);
+        supplyingObject = caller;
+        return false;
     }
 
     public void releaseControl()
@@ -71,6 +114,81 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
         this.HPSlider.value = this.HP;
         this.ammoSlider.value = this.ammo;
         this.fuelSlider.value = this.fuel;
+        if (refueling == 'W')
+        {
+
+            if (refuelTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel() > 1 && this.fuel > 0)
+            {
+                supplyingObject.gameObject.GetComponent<ResourceManagement>().addFuel(Time.deltaTime * refuelRatio);
+                this.fuel -= (Time.deltaTime * refuelRatio);
+                refuelCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel();
+            }
+            else if (refuelTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel() < 1 && this.fuel < maxFuel)
+            {
+                supplyingObject.gameObject.GetComponent<ResourceManagement>().addFuel(Time.deltaTime * refuelRatio * -1);
+                this.fuel += (Time.deltaTime * refuelRatio);
+                refuelCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel();
+            }
+            else
+            {
+                refueling = 'C';
+                this.refuelText.text = "Compeleted!";
+            }
+        }
+
+        if (reloading == 'W')
+        {
+            if (reloadTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo() > 1 && this.ammo > 0)
+            {
+                tempAmmo += Time.deltaTime * reloadRatio;
+                if (tempAmmo > 1)
+                {
+                    supplyingObject.gameObject.GetComponent<ResourceManagement>().setAmmo(1);
+                    reloadCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo();
+                    tempAmmo--;
+                    this.ammo--;
+                }
+            }
+            else if (refuelTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo() < 1 && this.ammo < maxAmmo)
+            {
+                tempAmmo += Time.deltaTime * reloadRatio;
+                if (tempAmmo > 1)
+                {
+                    supplyingObject.gameObject.GetComponent<ResourceManagement>().setAmmo(-1);
+                    reloadCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo();
+                    tempAmmo--;
+                    this.ammo++;
+                }
+            }
+            else
+            {
+                reloading = 'C';
+                this.reloadText.text = "Compeleted!";
+            }
+        }
+
+        if (repairing == 'W')
+        {
+            if (repairTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP() > 1 && this.heal > 0)
+            {
+                supplyingObject.gameObject.GetComponent<ResourceManagement>().heal(Time.deltaTime * refuelRatio);
+                this.heal -= (Time.deltaTime * refuelRatio);
+                repairCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP();
+            }
+            else if (repairTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP() < 1 && this.heal < maxHeal)
+            {
+                supplyingObject.gameObject.GetComponent<ResourceManagement>().heal(Time.deltaTime * refuelRatio * -1);
+                this.heal += (Time.deltaTime * refuelRatio);
+                repairCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP();
+            }
+            else
+            {
+                repairing = 'C';
+                this.repairText.text = "Compeleted!";
+            }
+        }
+
+
         if (this.HP <= 0)
         {
             this.gameOverText.gameObject.SetActive(true);
@@ -92,7 +210,7 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
 
     public void OnPauseButtonClicked()
     {
-        
+
         this.gamePauseText.gameObject.SetActive(true);
         this.resumeButton.gameObject.SetActive(true);
         this.setDisplayButton.gameObject.SetActive(true);
@@ -136,5 +254,101 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
     public void getHit(float attack)
     {
         this.HP -= attack;
+    }
+
+    public void OnRefuelButtonClicked()
+    {
+        switch (refueling)
+        {
+            case 'F':
+                this.refuelCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getFuel();
+                refuelMenu.SetActive(true);
+                refueling = 'W';
+                refuelText.text = "Cancel";
+                break;
+            case 'W':
+                refuelMenu.SetActive(false);
+                refueling = 'F';
+                refuelText.text = "Refuel&Unfuel";
+                break;
+            case 'C':
+                refuelText.text = "Refuel&Unfuel";
+                refuelMenu.SetActive(false);
+                this.baseUI.gameObject.SetActive(false);
+                refueling = 'F';
+                break;
+        }
+    }
+
+    public void OnReloadButtonClicked()
+    {
+        switch (reloading)
+        {
+            case 'F':
+                this.reloadCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getAmmo();
+                refuelMenu.SetActive(true);
+                refueling = 'W';
+                refuelText.text = "Cancel";
+                break;
+            case 'W':
+                refuelMenu.SetActive(false);
+                refueling = 'F';
+                refuelText.text = "Reload&Unload";
+                break;
+            case 'C':
+                refuelText.text = "Reload&Unload";
+                refuelMenu.SetActive(false);
+                this.baseUI.gameObject.SetActive(false);
+                refueling = 'F';
+                break;
+        }
+    }
+
+    public void OnRepairButtonClicked()
+    {
+        switch (repairing)
+        {
+            case 'F':
+                this.repairCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getHP();
+                refuelMenu.SetActive(true);
+                refueling = 'W';
+                refuelText.text = "Cancel";
+                break;
+            case 'W':
+                refuelMenu.SetActive(false);
+                refueling = 'F';
+                refuelText.text = "Repair";
+                break;
+            case 'C':
+                refuelText.text = "Repair";
+                refuelMenu.SetActive(false);
+                this.baseUI.gameObject.SetActive(false);
+                refueling = 'F';
+                break;
+        }
+    }
+
+    public void OnDropButtonClicked()
+    {
+        switch (dropping)
+        {
+            case 'F':
+                this.dropoffCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getSupply();
+                refuelMenu.SetActive(true);
+                refueling = 'W';
+                refuelText.text = "Cancel";
+                break;
+            case 'W':
+                refuelMenu.SetActive(false);
+                refueling = 'F';
+                refuelText.text = "Drop Off\nSupplies";
+                break;
+            case 'C':
+                refuelText.text = "Drop Off\nSupplies";
+                refuelMenu.SetActive(false);
+                this.baseUI.gameObject.SetActive(false);
+                refueling = 'F';
+                break;
+        }
     }
 }

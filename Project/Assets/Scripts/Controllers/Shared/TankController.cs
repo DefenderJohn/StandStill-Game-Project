@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TankController : MonoBehaviour
+public interface ResourceManagement
+{
+    float getFuel();
+    void addFuel(float value);
+    float getHP();
+    void heal(float value);
+    int getAmmo();
+    void setAmmo(int value);
+    float getSupply();
+}
+
+public class TankController : MonoBehaviour, ResourceManagement
 {
     public float hitPoints;
     public int ammo;
     public float fuel;
+    public float collectedSupply;
     public float fuelConsumingRatio;
     public float attack;
     public float aimingTime;
@@ -20,6 +32,42 @@ public class TankController : MonoBehaviour
     public Camera mainCamera;
     public Vector3 lastframePos;
     public Vector3 currentSpeed;
+
+    public void addFuel(float value)
+    {
+        this.fuel += value;
+    }
+
+    public int getAmmo()
+    {
+        return this.ammo;
+    }
+
+    public float getFuel()
+    {
+        return this.fuel;
+    }
+
+    public float getHP()
+    {
+        return this.hitPoints;
+    }
+
+    public float getSupply()
+    {
+        return collectedSupply;
+    }
+
+    public void heal(float value)
+    {
+        this.hitPoints += value;
+    }
+
+    public void setAmmo(int value)
+    {
+        this.ammo += value;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

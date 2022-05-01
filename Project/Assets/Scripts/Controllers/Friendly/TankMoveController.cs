@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public interface Controlable {
-    void haveControl();
+    bool haveControl(GameObject caller);
     void releaseControl();
     void setEnemy(GameObject enemy);
     void setDestination(Vector3 destination);
@@ -19,9 +19,10 @@ public class TankMoveController : MonoBehaviour, Controlable
     public bool controlled;
     public Vector3 dest;
 
-    public void haveControl()
+    public bool haveControl(GameObject caller)
     {
         this.controlled = true;
+        return true;
     }
 
     public void releaseControl()

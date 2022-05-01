@@ -9,10 +9,13 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //foreach (GameObject objects in GameObject.FindGameObjectsWithTag("Friendly"))
-        //{
-        //    objects.gameObject.transform.Find("Canvas").GetComponent<Canvas>().worldCamera = this.gameObject.transform.Find("Camera").GetComponent<Camera>();
-        //}
+        foreach (GameObject objects in GameObject.FindGameObjectsWithTag("Friendly"))
+        {
+            if (objects.name != "Basement")
+            {
+                objects.gameObject.transform.Find("Canvas").GetComponent<Canvas>().worldCamera = this.gameObject.transform.Find("Camera").GetComponent<Camera>(); 
+            }
+        }
         //foreach (GameObject objects in GameObject.FindGameObjectsWithTag("EnemyTank"))
         //{
         //    objects.gameObject.transform.Find("Canvas").GetComponent<Canvas>().worldCamera = this.gameObject.transform.Find("Camera").GetComponent<Camera>();

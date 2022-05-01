@@ -5,7 +5,7 @@ using UnityEngine;
 public class FriendlyGroupController : MonoBehaviour
 {
     public Camera mainCamera;
-    public GameObject controlledGameObject;
+    public GameObject controlledGameObject=null;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +25,15 @@ public class FriendlyGroupController : MonoBehaviour
             {
                 if (hit.collider.gameObject.tag == "Friendly")
                 {
-                    if (this.controlledGameObject != null) controlledGameObject.GetComponent<Controlable>().releaseControl();
-                    controlledGameObject = hit.collider.gameObject;
-                    controlledGameObject.GetComponent<Controlable>().haveControl();
+                    if (controlledGameObject == null)
+                    {
+                        controlledGameObject = hit.collider.gameObject;
+                    }
+                    if (controlledGameObject.GetComponent<Controlable>().haveControl(this.controlledGameObject))
+                    {
+                        controlledGameObject = hit.collider.gameObject;
+                        if (this.controlledGameObject != null) controlledGameObject.GetComponent<Controlable>().releaseControl();
+                    }
                 }
                 else if (hit.collider.gameObject.tag == "EnemyTank")
                 {
