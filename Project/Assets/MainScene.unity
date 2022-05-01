@@ -360,10 +360,10 @@ MonoBehaviour:
   reloadText: {fileID: 583760054}
   repairText: {fileID: 1846333518}
   dropoffText: {fileID: 559579881}
-  refueling: 0
-  reloading: 0
-  repairing: 0
-  dropping: 0
+  refueling: 70
+  reloading: 70
+  repairing: 70
+  dropping: 70
   refuelRatio: 0
   reloadRatio: 0
   repairRatio: 0
@@ -5231,7 +5231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1315829813
 RectTransform:
   m_ObjectHideFlags: 0

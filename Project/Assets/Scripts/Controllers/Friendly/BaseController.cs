@@ -106,6 +106,7 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
         this.ammoSlider.minValue = 0;
         this.healSlider.maxValue = maxHeal;
         this.healSlider.minValue = 0;
+
     }
 
     // Update is called once per frame
@@ -261,6 +262,10 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
         switch (refueling)
         {
             case 'F':
+                this.refuelCurrentSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxFuel();
+                this.refuelCurrentSlider.minValue = 0;
+                this.refuelTargetSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxFuel();
+                this.refuelTargetSlider.minValue = 0;
                 this.refuelCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getFuel();
                 refuelMenu.SetActive(true);
                 refueling = 'W';
@@ -285,6 +290,10 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
         switch (reloading)
         {
             case 'F':
+                this.reloadCurrentSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxAmmo();
+                this.reloadCurrentSlider.minValue = 0;
+                this.reloadTargetSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxAmmo();
+                this.reloadTargetSlider.minValue = 0;
                 this.reloadCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getAmmo();
                 refuelMenu.SetActive(true);
                 refueling = 'W';
@@ -309,6 +318,10 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
         switch (repairing)
         {
             case 'F':
+                this.repairCurrentSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxHP();
+                this.repairCurrentSlider.minValue = 0;
+                this.repairTargetSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxHP();
+                this.repairTargetSlider.minValue = 0;
                 this.repairCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getHP();
                 refuelMenu.SetActive(true);
                 refueling = 'W';
@@ -333,6 +346,10 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
         switch (dropping)
         {
             case 'F':
+                this.dropoffCurrentSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxSupply();
+                this.dropoffCurrentSlider.minValue = 0;
+                this.dropoffTargetSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxSupply();
+                this.dropoffTargetSlider.minValue = 0;
                 this.dropoffCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getSupply();
                 refuelMenu.SetActive(true);
                 refueling = 'W';

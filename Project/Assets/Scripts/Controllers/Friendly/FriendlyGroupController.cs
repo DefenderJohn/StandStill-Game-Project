@@ -29,7 +29,7 @@ public class FriendlyGroupController : MonoBehaviour
                     {
                         controlledGameObject = hit.collider.gameObject;
                     }
-                    if (controlledGameObject.GetComponent<Controlable>().haveControl(this.controlledGameObject))
+                    if (hit.collider.gameObject.GetComponent<Controlable>().haveControl(this.controlledGameObject))
                     {
                         controlledGameObject = hit.collider.gameObject;
                         if (this.controlledGameObject != null) controlledGameObject.GetComponent<Controlable>().releaseControl();

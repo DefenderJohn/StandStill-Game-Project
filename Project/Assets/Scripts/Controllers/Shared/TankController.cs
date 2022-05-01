@@ -12,6 +12,10 @@ public interface ResourceManagement
     int getAmmo();
     void setAmmo(int value);
     float getSupply();
+    float getMaxFuel();
+    float getMaxHP();
+    int getMaxAmmo();
+    float getMaxSupply();
 }
 
 public class TankController : MonoBehaviour, ResourceManagement
@@ -51,6 +55,26 @@ public class TankController : MonoBehaviour, ResourceManagement
     public float getHP()
     {
         return this.hitPoints;
+    }
+
+    public int getMaxAmmo()
+    {
+        return (int)this.ammoSlider.maxValue;
+    }
+
+    public float getMaxFuel()
+    {
+        return this.fuelSlider.maxValue;
+    }
+
+    public float getMaxHP()
+    {
+        return this.HPSlider.maxValue;
+    }
+
+    public float getMaxSupply()
+    {
+        return 100;
     }
 
     public float getSupply()
