@@ -29,10 +29,10 @@ public class FriendlyGroupController : MonoBehaviour
                     {
                         controlledGameObject = hit.collider.gameObject;
                     }
+                    if (this.controlledGameObject != null) controlledGameObject.GetComponent<Controlable>().releaseControl();
                     if (hit.collider.gameObject.GetComponent<Controlable>().haveControl(this.controlledGameObject))
                     {
                         controlledGameObject = hit.collider.gameObject;
-                        if (this.controlledGameObject != null) controlledGameObject.GetComponent<Controlable>().releaseControl();
                     }
                 }
                 else if (hit.collider.gameObject.tag == "EnemyTank")

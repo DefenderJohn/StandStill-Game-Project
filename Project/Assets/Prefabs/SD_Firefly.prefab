@@ -624,7 +624,7 @@ NavMeshAgent:
   m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 140
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -666,6 +666,7 @@ MonoBehaviour:
   hitPoints: 370
   ammo: 15
   fuel: 120
+  collectedSupply: 0
   fuelConsumingRatio: 0.1
   attack: 50
   aimingTime: 3.06

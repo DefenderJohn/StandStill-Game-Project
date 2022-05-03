@@ -69,13 +69,25 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
     public float dropRatio;
     public float tempAmmo;
 
+    public GameObject checkPointHigh;
+    public GameObject checkPointLow;
+
     public Canvas baseUI;
     public GameObject supplyingObject;
 
     public bool haveControl(GameObject caller)
     {
-        this.baseUI.gameObject.SetActive(true);
-        supplyingObject = caller;
+        Ray ray = new Ray(checkPointHigh.transform.position,new Vector3(0.0f,-1.0f,0.0f));
+        Physics.Raycast(ray,out RaycastHit hitInfo,
+            Vector3.Distance(checkPointHigh.transform.position, checkPointLow.transform.position) - 0.01f);
+        if (hitInfo.rigidbody != null && hitInfo.rigidbody.gameObject.tag == "Friendly")
+        {
+            this.baseUI.gameObject.SetActive(true);
+            supplyingObject = hitInfo.rigidbody.gameObject;
+        }
+        else {
+            supplyingObject = null;
+        }
         return false;
     }
 
@@ -115,78 +127,93 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
         this.HPSlider.value = this.HP;
         this.ammoSlider.value = this.ammo;
         this.fuelSlider.value = this.fuel;
-        if (refueling == 'W')
-        {
 
-            if (refuelTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel() > 1 && this.fuel > 0)
-            {
-                supplyingObject.gameObject.GetComponent<ResourceManagement>().addFuel(Time.deltaTime * refuelRatio);
-                this.fuel -= (Time.deltaTime * refuelRatio);
-                refuelCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel();
-            }
-            else if (refuelTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel() < 1 && this.fuel < maxFuel)
-            {
-                supplyingObject.gameObject.GetComponent<ResourceManagement>().addFuel(Time.deltaTime * refuelRatio * -1);
-                this.fuel += (Time.deltaTime * refuelRatio);
-                refuelCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel();
-            }
-            else
-            {
-                refueling = 'C';
-                this.refuelText.text = "Compeleted!";
+        if (this.supplyingObject != null)
+        {
+            Ray ray = new Ray(checkPointHigh.transform.position, new Vector3(0.0f, -1.0f, 0.0f));
+            Physics.Raycast(ray, out RaycastHit hitInfo,
+                Vector3.Distance(checkPointHigh.transform.position, checkPointLow.transform.position) - 0.01f);
+            if (hitInfo.rigidbody == null || hitInfo.rigidbody.gameObject.tag != "Friendly") {
+                this.supplyingObject = null;
+                this.baseUI.gameObject.SetActive(false);
             }
         }
 
-        if (reloading == 'W')
+        if (this.supplyingObject != null)
         {
-            if (reloadTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo() > 1 && this.ammo > 0)
+            if (refueling == 'W')
             {
-                tempAmmo += Time.deltaTime * reloadRatio;
-                if (tempAmmo > 1)
-                {
-                    supplyingObject.gameObject.GetComponent<ResourceManagement>().setAmmo(1);
-                    reloadCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo();
-                    tempAmmo--;
-                    this.ammo--;
-                }
-            }
-            else if (refuelTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo() < 1 && this.ammo < maxAmmo)
-            {
-                tempAmmo += Time.deltaTime * reloadRatio;
-                if (tempAmmo > 1)
-                {
-                    supplyingObject.gameObject.GetComponent<ResourceManagement>().setAmmo(-1);
-                    reloadCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo();
-                    tempAmmo--;
-                    this.ammo++;
-                }
-            }
-            else
-            {
-                reloading = 'C';
-                this.reloadText.text = "Compeleted!";
-            }
-        }
 
-        if (repairing == 'W')
-        {
-            if (repairTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP() > 1 && this.heal > 0)
-            {
-                supplyingObject.gameObject.GetComponent<ResourceManagement>().heal(Time.deltaTime * refuelRatio);
-                this.heal -= (Time.deltaTime * refuelRatio);
-                repairCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP();
+                if (refuelTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel() > 1 && this.fuel > 0)
+                {
+                    supplyingObject.gameObject.GetComponent<ResourceManagement>().addFuel(Time.deltaTime * refuelRatio);
+                    this.fuel -= (Time.deltaTime * refuelRatio);
+                    refuelCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel();
+                }
+                else if (refuelTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel() < 1 && this.fuel < maxFuel)
+                {
+                    supplyingObject.gameObject.GetComponent<ResourceManagement>().addFuel(Time.deltaTime * refuelRatio * -1);
+                    this.fuel += (Time.deltaTime * refuelRatio);
+                    refuelCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getFuel();
+                }
+                else
+                {
+                    refueling = 'C';
+                    this.refuelText.text = "Compeleted!";
+                }
             }
-            else if (repairTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP() < 1 && this.heal < maxHeal)
+
+            if (reloading == 'W')
             {
-                supplyingObject.gameObject.GetComponent<ResourceManagement>().heal(Time.deltaTime * refuelRatio * -1);
-                this.heal += (Time.deltaTime * refuelRatio);
-                repairCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP();
+                if (reloadTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo() > 1 && this.ammo > 0)
+                {
+                    tempAmmo += Time.deltaTime * reloadRatio;
+                    if (tempAmmo > 1)
+                    {
+                        supplyingObject.gameObject.GetComponent<ResourceManagement>().setAmmo(1);
+                        reloadCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo();
+                        tempAmmo--;
+                        this.ammo--;
+                    }
+                }
+                else if (refuelTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo() < 1 && this.ammo < maxAmmo)
+                {
+                    tempAmmo += Time.deltaTime * reloadRatio;
+                    if (tempAmmo > 1)
+                    {
+                        supplyingObject.gameObject.GetComponent<ResourceManagement>().setAmmo(-1);
+                        reloadCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getAmmo();
+                        tempAmmo--;
+                        this.ammo++;
+                    }
+                }
+                else
+                {
+                    reloading = 'C';
+                    this.reloadText.text = "Compeleted!";
+                }
             }
-            else
+
+            if (repairing == 'W')
             {
-                repairing = 'C';
-                this.repairText.text = "Compeleted!";
-            }
+                if (repairTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP() > 1 && this.heal > 0)
+                {
+                    supplyingObject.gameObject.GetComponent<ResourceManagement>().heal(Time.deltaTime * refuelRatio);
+                    this.heal -= (Time.deltaTime * refuelRatio);
+                    repairCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP();
+                }
+                else if (repairTargetSlider.value - supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP() < 1 && this.heal < maxHeal)
+                {
+                    supplyingObject.gameObject.GetComponent<ResourceManagement>().heal(Time.deltaTime * refuelRatio * -1);
+                    this.heal += (Time.deltaTime * refuelRatio);
+                    repairCurrentSlider.value = supplyingObject.gameObject.GetComponent<ResourceManagement>().getHP();
+                }
+                else
+                {
+                    repairing = 'C';
+                    this.repairText.text = "Compeleted!";
+                }
+            } 
         }
 
 

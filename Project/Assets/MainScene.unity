@@ -369,6 +369,8 @@ MonoBehaviour:
   repairRatio: 0
   dropRatio: 0
   tempAmmo: 0
+  checkPointHigh: {fileID: 1980046850}
+  checkPointLow: {fileID: 1480974506}
   baseUI: {fileID: 1315829816}
   supplyingObject: {fileID: 0}
 --- !u!1 &88317841
@@ -539,7 +541,7 @@ GameObject:
   - component: {fileID: 113922947}
   - component: {fileID: 113922946}
   m_Layer: 0
-  m_Name: RefuelCurrentText
+  m_Name: ReloadCurrentText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -730,7 +732,7 @@ GameObject:
   - component: {fileID: 200718828}
   - component: {fileID: 200718829}
   m_Layer: 0
-  m_Name: RefuelTarget
+  m_Name: DropTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1244,7 +1246,7 @@ GameObject:
   - component: {fileID: 312028716}
   - component: {fileID: 312028715}
   m_Layer: 0
-  m_Name: RefuelTargetDisplayText
+  m_Name: RepairTargetDisplayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1458,6 +1460,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346885732}
   m_CullTransparentMesh: 0
+--- !u!1 &429042582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429042583}
+  - component: {fileID: 429042585}
+  - component: {fileID: 429042584}
+  m_Layer: 0
+  m_Name: Checker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &429042583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429042582}
+  m_LocalRotation: {x: -0.022502735, y: -0.0008072853, z: 0.045401506, w: 0.99871504}
+  m_LocalPosition: {x: -8.51, y: -10.37, z: -15.02}
+  m_LocalScale: {x: 4.8392, y: 0.09098443, z: 4.8392}
+  m_Children:
+  - {fileID: 1980046851}
+  - {fileID: 1480974507}
+  m_Father: {fileID: 823154248}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -2.572, y: -0.21000001, z: 5.21}
+--- !u!23 &429042584
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429042582}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0e09ccf9192c3424d832750c85fc81c8, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &429042585
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429042582}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &429954622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,7 +1971,7 @@ GameObject:
   - component: {fileID: 540200198}
   - component: {fileID: 540200197}
   m_Layer: 0
-  m_Name: RefuelDisplayText
+  m_Name: RepairDisplayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2192,7 +2275,7 @@ GameObject:
   - component: {fileID: 559579882}
   - component: {fileID: 559579881}
   m_Layer: 0
-  m_Name: Text
+  m_Name: DropText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2309,7 +2392,7 @@ GameObject:
   - component: {fileID: 583760055}
   - component: {fileID: 583760054}
   m_Layer: 0
-  m_Name: Text
+  m_Name: ReloadText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2588,7 +2671,7 @@ GameObject:
   - component: {fileID: 699203694}
   - component: {fileID: 699203693}
   m_Layer: 0
-  m_Name: RefuelDisplayText
+  m_Name: DropDisplayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3131,7 +3214,7 @@ GameObject:
   - component: {fileID: 792937088}
   - component: {fileID: 792937087}
   m_Layer: 0
-  m_Name: RefuelButton
+  m_Name: ReloadButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3913,7 +3996,7 @@ GameObject:
   - component: {fileID: 863879113}
   - component: {fileID: 863879112}
   m_Layer: 0
-  m_Name: RefuelTargetDisplayText
+  m_Name: DropTargetDisplayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4093,7 +4176,7 @@ GameObject:
   - component: {fileID: 983127021}
   - component: {fileID: 983127020}
   m_Layer: 0
-  m_Name: RefuelCurrentText
+  m_Name: DropCurrentText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4244,7 +4327,7 @@ GameObject:
   - component: {fileID: 1031183656}
   - component: {fileID: 1031183657}
   m_Layer: 0
-  m_Name: RefuelTarget
+  m_Name: ReloadTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4458,7 +4541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052832805}
   m_Layer: 0
-  m_Name: RefuelMenu
+  m_Name: DropMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4575,7 +4658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1094223377}
   m_Layer: 0
-  m_Name: RefuelMenu
+  m_Name: RepairMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5064,7 +5147,7 @@ GameObject:
   - component: {fileID: 1279540357}
   - component: {fileID: 1279540356}
   m_Layer: 0
-  m_Name: RefuelCurrentText
+  m_Name: RepairCurrentText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5653,7 +5736,7 @@ GameObject:
   - component: {fileID: 1418482798}
   - component: {fileID: 1418482797}
   m_Layer: 0
-  m_Name: RefuelDisplayText
+  m_Name: ReloadDisplayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5730,7 +5813,7 @@ GameObject:
   - component: {fileID: 1420329343}
   - component: {fileID: 1420329344}
   m_Layer: 0
-  m_Name: RefuelCurrent
+  m_Name: ReloadCurrent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5884,6 +5967,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1480974506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1480974507}
+  m_Layer: 0
+  m_Name: CheckerLower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1480974507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480974506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429042583}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1484571080
 GameObject:
   m_ObjectHideFlags: 0
@@ -6218,7 +6331,7 @@ GameObject:
   - component: {fileID: 1513447673}
   - component: {fileID: 1513447672}
   m_Layer: 0
-  m_Name: Text
+  m_Name: RefuelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6415,7 +6528,7 @@ GameObject:
   - component: {fileID: 1557881786}
   - component: {fileID: 1557881787}
   m_Layer: 0
-  m_Name: RefuelCurrent
+  m_Name: RepairCurrent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6657,7 +6770,7 @@ GameObject:
   - component: {fileID: 1689905985}
   - component: {fileID: 1689905984}
   m_Layer: 0
-  m_Name: 'RefuelTargetText '
+  m_Name: 'ReloadTargetText '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6823,7 +6936,7 @@ GameObject:
   - component: {fileID: 1728798486}
   - component: {fileID: 1728798487}
   m_Layer: 0
-  m_Name: RefuelTarget
+  m_Name: RepairTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7222,7 +7335,7 @@ GameObject:
   - component: {fileID: 1833709790}
   - component: {fileID: 1833709789}
   m_Layer: 0
-  m_Name: RefuelTargetDisplayText
+  m_Name: ReloadTargetDisplayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7298,7 +7411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1836940420}
   m_Layer: 0
-  m_Name: RefuelMenu
+  m_Name: ReloadMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7377,7 +7490,7 @@ GameObject:
   - component: {fileID: 1846333519}
   - component: {fileID: 1846333518}
   m_Layer: 0
-  m_Name: Text
+  m_Name: RepairText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7673,7 +7786,7 @@ GameObject:
   - component: {fileID: 1866236571}
   - component: {fileID: 1866236572}
   m_Layer: 0
-  m_Name: RefuelCurrent
+  m_Name: DropCurrent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8009,7 +8122,7 @@ GameObject:
   - component: {fileID: 1904010108}
   - component: {fileID: 1904010107}
   m_Layer: 0
-  m_Name: 'RefuelTargetText '
+  m_Name: 'RepairTargetText '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8696,6 +8809,36 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1980046850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1980046851}
+  m_Layer: 0
+  m_Name: CheckerUpper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1980046851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980046850}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.087, y: 67.1, z: 0.198}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429042583}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1990028211
 GameObject:
   m_ObjectHideFlags: 0
@@ -9361,7 +9504,7 @@ GameObject:
   - component: {fileID: 2115661075}
   - component: {fileID: 2115661074}
   m_Layer: 0
-  m_Name: RepairButton
+  m_Name: DropButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9490,7 +9633,7 @@ GameObject:
   - component: {fileID: 2119932363}
   - component: {fileID: 2119932362}
   m_Layer: 0
-  m_Name: 'RefuelTargetText '
+  m_Name: 'DropTargetText '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
