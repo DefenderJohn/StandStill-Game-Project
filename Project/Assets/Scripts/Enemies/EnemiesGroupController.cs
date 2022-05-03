@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemiesGroupController : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class EnemiesGroupController : MonoBehaviour
     public GameObject enemyPrefab;
     int destinationIndex;
     int sourceIndex;
+    public Text gameOverText;
+    public Button restartButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,11 @@ public class EnemiesGroupController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (waveNumber >= 8) {
+            this.gameOverText.gameObject.SetActive(true);
+            this.restartButton.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+        }
 
         checkingDelay -= Time.deltaTime;
         if (checkingDelay <= 0)
