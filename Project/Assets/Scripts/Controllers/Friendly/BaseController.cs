@@ -322,20 +322,20 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
                 this.reloadTargetSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxAmmo();
                 this.reloadTargetSlider.minValue = 0;
                 this.reloadCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getAmmo();
-                refuelMenu.SetActive(true);
-                refueling = 'W';
-                refuelText.text = "Cancel";
+                reloadMenu.SetActive(true);
+                reloading = 'W';
+                reloadText.text = "Cancel";
                 break;
             case 'W':
-                refuelMenu.SetActive(false);
-                refueling = 'F';
-                refuelText.text = "Reload&Unload";
+                reloadMenu.SetActive(false);
+                reloading = 'F';
+                reloadText.text = "Reload&Unload";
                 break;
             case 'C':
-                refuelText.text = "Reload&Unload";
-                refuelMenu.SetActive(false);
+                reloadText.text = "Reload&Unload";
+                reloadMenu.SetActive(false);
                 this.baseUI.gameObject.SetActive(false);
-                refueling = 'F';
+                reloading = 'F';
                 break;
         }
     }
@@ -350,20 +350,20 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
                 this.repairTargetSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxHP();
                 this.repairTargetSlider.minValue = 0;
                 this.repairCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getHP();
-                refuelMenu.SetActive(true);
-                refueling = 'W';
-                refuelText.text = "Cancel";
+                repairMenu.SetActive(true);
+                repairing = 'W';
+                repairText.text = "Cancel";
                 break;
             case 'W':
-                refuelMenu.SetActive(false);
-                refueling = 'F';
-                refuelText.text = "Repair";
+                repairMenu.SetActive(false);
+                repairing = 'F';
+                repairText.text = "Repair";
                 break;
             case 'C':
-                refuelText.text = "Repair";
-                refuelMenu.SetActive(false);
+                repairText.text = "Repair";
+                repairMenu.SetActive(false);
                 this.baseUI.gameObject.SetActive(false);
-                refueling = 'F';
+                repairing = 'F';
                 break;
         }
     }
@@ -378,20 +378,20 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
                 this.dropoffTargetSlider.maxValue = this.supplyingObject.GetComponent<ResourceManagement>().getMaxSupply();
                 this.dropoffTargetSlider.minValue = 0;
                 this.dropoffCurrentSlider.value = this.supplyingObject.GetComponent<ResourceManagement>().getSupply();
-                refuelMenu.SetActive(true);
-                refueling = 'W';
-                refuelText.text = "Cancel";
+                dropoffMenu.SetActive(true);
+                dropping = 'W';
+                dropoffText.text = "Cancel";
                 break;
             case 'W':
-                refuelMenu.SetActive(false);
-                refueling = 'F';
-                refuelText.text = "Drop Off\nSupplies";
+                dropoffMenu.SetActive(false);
+                dropping = 'F';
+                dropoffText.text = "Drop Off\nSupplies";
                 break;
             case 'C':
-                refuelText.text = "Drop Off\nSupplies";
-                refuelMenu.SetActive(false);
+                dropoffText.text = "Drop Off\nSupplies";
+                dropoffMenu.SetActive(false);
                 this.baseUI.gameObject.SetActive(false);
-                refueling = 'F';
+                dropping = 'F';
                 break;
         }
     }
