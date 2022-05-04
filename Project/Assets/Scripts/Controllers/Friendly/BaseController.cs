@@ -58,6 +58,8 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
     public Text repairText;
     public Text dropoffText;
 
+
+
     public char refueling;
     public char reloading;
     public char repairing;
@@ -228,12 +230,12 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
     public void OnRestartButtonClicked()
     {
         SceneManager.LoadScene(currentSceneIndex);
+        Time.timeScale = 1;
         this.gamePauseText.gameObject.SetActive(false);
         this.resumeButton.gameObject.SetActive(false);
         this.setDisplayButton.gameObject.SetActive(false);
         this.gameOverText.gameObject.SetActive(false);
         this.restartButton.gameObject.SetActive(false);
-        Time.timeScale = 1;
     }
 
     public void OnPauseButtonClicked()
@@ -368,6 +370,9 @@ public class BaseController : MonoBehaviour, Controlable, IHitable
         }
     }
 
+    public void onExitButtonClicked() {
+        this.baseUI.gameObject.SetActive(false);
+    }
     public void OnDropButtonClicked()
     {
         switch (dropping)

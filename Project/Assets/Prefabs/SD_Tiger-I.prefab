@@ -1476,6 +1476,7 @@ MonoBehaviour:
   turrent: {fileID: 4288772609036132265}
   gun: {fileID: 6785782260410635832}
   virtualAiming: {fileID: 964592431737490577}
+  forceSetEnemy: 0
   speed: 10
   xzRotationDir: {x: 0, y: 0, z: 0, w: 0}
   yRotationDir: {x: 0, y: 0, z: 0, w: 0}
@@ -1525,8 +1526,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 200
   ammo: 40
-  fuel: 270
-  fuelConsumingRatio: 0.11
+  fuel: 400
+  collectedSupply: 0
+  fuelConsumingRatio: 0.01
   attack: 60
   aimingTime: 3
   loadingTime: 5

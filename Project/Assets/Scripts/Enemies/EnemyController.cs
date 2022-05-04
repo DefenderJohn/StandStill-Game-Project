@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public Camera mainCamera;
     public GameObject enemyInContact;
     public bool contactWithEnemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,7 @@ public class EnemyController : MonoBehaviour
             {
                 foreach (GameObject friends in GameObject.FindGameObjectsWithTag("Friendly"))
                 {
-                    if (Vector3.Distance(friends.gameObject.transform.position, this.gameObject.transform.position) <= 100)
+                    if (Vector3.Distance(friends.gameObject.transform.position, this.gameObject.transform.position) <= 30)
                     {
                         agent.isStopped = true;
                         contactWithEnemy = true;

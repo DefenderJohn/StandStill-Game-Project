@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EnemiesGroupController : MonoBehaviour
 {
     public List<GameObject> destinations;
-    public List<GameObject> spawnPositions;
+    public List<Vector3> spawnPositions;
     public float enemyWaveDelay;
     private float backupWaveDelay;
     public float checkingDelay;
@@ -15,6 +15,7 @@ public class EnemiesGroupController : MonoBehaviour
     private float backupSingleEnemySpawnDelay;
     public HashSet<GameObject> ActiveEnemies;
     public int waveEnemyNumbers;
+    public int adjustEnemyNum;
     public int waveNumber = 0;
     public int currentEnemy = 0;
     public GameObject enemyPrefab;
@@ -22,6 +23,9 @@ public class EnemiesGroupController : MonoBehaviour
     int sourceIndex;
     public Text gameOverText;
     public Button restartButton;
+    public GameObject tempSpawn;
+    public Text currentWaveNum;
+    public Text remainTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,10 +37,13 @@ public class EnemiesGroupController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waveNumber >= 8) {
+        currentWaveNum.text = this.waveNumber + "";
+        remainTime.text = this.enemyWaveDelay.ToString();
+        if (waveNumber >= 10)
+        {
             this.gameOverText.gameObject.SetActive(true);
             this.restartButton.gameObject.SetActive(true);
-            Time.timeScale = 0f;
+            Time.timeScale = 0.1f;
         }
 
         checkingDelay -= Time.deltaTime;
@@ -50,7 +57,7 @@ public class EnemiesGroupController : MonoBehaviour
                 checkingDelay = backupCheckingDelay;
                 enemyWaveDelay = backupWaveDelay;
                 waveNumber++;
-                waveEnemyNumbers = (int)Mathf.Log(waveNumber, 1.756f);
+                waveEnemyNumbers = adjustEnemyNum + (int)Mathf.Log(waveNumber, 1.756f);
                 spawnEnemies();
             }
 
@@ -66,8 +73,8 @@ public class EnemiesGroupController : MonoBehaviour
     {
         destinationIndex = Random.Range(0, destinations.Count);
         sourceIndex = Random.Range(0, spawnPositions.Count);
-        GameObject newEnemy = Instantiate<GameObject>(enemyPrefab, spawnPositions[sourceIndex].transform, worldPositionStays: true);
-        newEnemy.transform.position = spawnPositions[sourceIndex].transform.position;
+        GameObject newEnemy = Instantiate<GameObject>(enemyPrefab,spawnPositions[sourceIndex],Quaternion.identity);
+        //newEnemy.transform.position = spawnPositions[sourceIndex].transform.position;
         newEnemy.gameObject.GetComponent<EnemyController>().movePos = destinations[destinationIndex].transform.position;
         ActiveEnemies.Add(newEnemy);
 
